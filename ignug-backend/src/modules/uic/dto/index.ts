@@ -96,3 +96,10 @@ export * from './documents/create-document.dto';
 export * from './documents/filter-document.dto';
 export * from './documents/read-document.dto';
 export * from './documents/update-document.dto';
+
+//Profession
+export * from './professions/base-profession.dto';
+export * from './professions/create-profession.dto';
+export * from './professions/filter-profession.dto';
+export * from './professions/read-profession.dto';
+export * from './professions/update-profession.dto';

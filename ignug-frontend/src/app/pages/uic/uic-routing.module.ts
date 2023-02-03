@@ -63,14 +63,18 @@ const routes: Routes = [
     loadChildren: () => import('./mesh-student-requirement/mesh-student-requirement.module').then(m => m.MeshStudentRequirementModule)
   },
 
-  {
-    path: 'approveds',
-    loadChildren: () => import('./approve/approve.module').then(m => m.DocumentModule)
-  },
+  // {
+  //   path: 'approveds',
+  //   loadChildren: () => import('./approve/approve.module').then(m => m.DocumentModule)
+  // },
 
   {
     path: 'documents',
     loadChildren: () => import('./document/document.module').then(m => m.DocumentModule)
+  },
+  {
+    path: 'professions',
+    loadChildren: () => import('./profession/profession.module').then(m => m.ProfessionModule)
   },
 
 ];

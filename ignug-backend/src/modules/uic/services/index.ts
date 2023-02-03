@@ -12,3 +12,4 @@ export * from './student-informations.service';
 export * from './requirement-request.service';
 export * from './mesh-student-requirment.service';
 export * from './documents.service';
+export * from './professions.service';

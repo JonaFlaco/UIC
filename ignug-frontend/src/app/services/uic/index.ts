@@ -14,3 +14,4 @@ export * from './requirement-request-http.service';
 export * from './requirement-format-http.service';
 export * from './mesh-student-requirement-http.service';
 export * from './document-http.service';
+export * from './profession-http.service';

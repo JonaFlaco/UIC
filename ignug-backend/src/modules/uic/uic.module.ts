@@ -15,7 +15,8 @@ import {
   RequirementRequestsController,
   MeshStudentRequirementsController,
   TutorAssignmentsController,
-  DocumentsController
+  DocumentsController,
+  ProfessionsController
 } from '@uic/controllers';
 import {
   ModalitiesService,
@@ -32,6 +33,7 @@ import {
   RequirementRequestsService,
   MeshStudentRequirementsService,
   DocumentsService,
+  ProfessionsService
 } from '@uic/services';
 
 @Global()
@@ -52,6 +54,7 @@ import {
     RequirementRequestsController,
     MeshStudentRequirementsController,
     DocumentsController,
+    ProfessionsController,
   ],
   providers: [
     ...uicProviders,
@@ -69,6 +72,7 @@ import {
     RequirementRequestsService,
     MeshStudentRequirementsService,
     DocumentsService,
+    ProfessionsService,
   ],
   exports: [],
 })

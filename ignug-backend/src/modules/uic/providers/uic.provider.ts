@@ -13,6 +13,7 @@ import {
   MeshStudentRequirementEntity,
   EnrollmentEntity,
   DocumentEntity,
+  ProfessionEntity,
 } from '@uic/entities';
 
 import { DataSourceEnum, RepositoryEnum } from '@shared/enums';
@@ -102,6 +103,12 @@ export const uicProviders = [
     provide: RepositoryEnum.DOCUMENT_REPOSITORY,
     useFactory: (dataSource: DataSource) =>
       dataSource.getRepository(DocumentEntity),
+    inject: [DataSourceEnum.PG_DATA_SOURCE],
+  },
+  {
+    provide: RepositoryEnum.PROFESSION_REPOSITORY,
+    useFactory: (dataSource: DataSource) =>
+      dataSource.getRepository(ProfessionEntity),
     inject: [DataSourceEnum.PG_DATA_SOURCE],
   }
 ];

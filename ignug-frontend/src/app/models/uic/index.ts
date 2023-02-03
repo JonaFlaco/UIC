@@ -13,4 +13,5 @@ export * from './student-information.model';
 export * from './requirement-request.model';
 export * from './mesh-student-requirement.model';
 export * from './document.model';
+export * from './profession.model';
 

@@ -12,3 +12,4 @@ export * from './student-information.entity';
 export * from './requirement-request.entity';
 export * from './mesh-student-requirement.entity';
 export * from './document.entity';
+export * from './profession.entity';

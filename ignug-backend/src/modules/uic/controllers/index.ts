@@ -12,4 +12,5 @@ export * from './student-information.controller';
 export * from './requirement-requests.controller';
 export * from './mesh-student-requirements.controller';
 export * from './documents.controller';
+export * from './professions.controller';
 
