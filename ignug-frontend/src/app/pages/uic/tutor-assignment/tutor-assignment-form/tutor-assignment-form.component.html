@@ -1,0 +1,120 @@
+<app-skeleton *ngIf="isLoadingSkeleton" [type]="'card'"></app-skeleton>
+<p-panel *ngIf="!isLoadingSkeleton"
+         class="p-fluid"
+         collapseIcon="pi pi-times"
+         [toggleable]="true"
+         (collapsedChange)="back()">
+  <ng-template pTemplate="header">
+    <i *ngIf="id===''" class="pi pi-planning-plus mr-2"></i>
+    <i *ngIf="id!=''" class="pi pi-planning-edit mr-2"></i>
+    <h2 class="panel-header">{{panelHeader}}</h2>
+  </ng-template>
+  <small [innerHTML]="this.messageService.requiredFields"></small>
+  <p-divider></p-divider>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label appLabel for="project" label="Proyectos:" [required]="projectField"></label>
+      <p-dropdown id="project"
+      formControlName="project"
+      dataKey="id"
+      [options]="projects"
+      optionLabel="title"
+      [filter]="true"
+      filterBy="title"
+      placeholder="Select">
+<ng-template pTemplate="selectedItem">
+<div *ngIf="projectField.value">
+<div>{{projectField.value.title}}</div>
+</div>
+</ng-template>
+<ng-template pTemplate="item" let-item>
+{{item.title}}
+</ng-template>
+</p-dropdown>
+      <small appErrorMessage
+             [errors]="projectField.errors"
+             [touched]="projectField.touched"
+             [dirty]="projectField.dirty">
+      </small>
+    </div>
+
+     <div class="field">
+        <label appLabel for="type" label="Catálogo:" [required]="typeField"></label>
+        <p-dropdown id="type"
+      formControlName="type"
+      dataKey="id"
+      [options]="types"
+      optionLabel="name"
+      [filter]="true"
+      filterBy="name"
+      placeholder="Select">
+<ng-template pTemplate="selectedItem">
+<div *ngIf="typeField.value">
+<div>{{typeField.value.name}}</div>
+</div>
+</ng-template>
+<ng-template pTemplate="item" let-item>
+{{item.name}}
+</ng-template>
+</p-dropdown>
+        <small appErrorMessage
+               [errors]="typeField.errors"
+               [touched]="typeField.touched"
+               [dirty]="typeField.dirty">
+        </small>
+      </div>
+      <!--Project plan-->
+      <div class="field">
+        <label appLabel for="projectPlan" label="Anteproyecto:" [required]="projectPlanField"></label>
+        <p-dropdown id="projectPlan"
+      formControlName="projectPlan"
+      dataKey="id"
+      [options]="projectPlans"
+      optionLabel="description"
+      [filter]="true"
+      filterBy="description"
+      placeholder="Select">
+<ng-template pTemplate="selectedItem">
+<div *ngIf="projectPlanField.value">
+<div>{{projectPlanField.value.description}}</div>
+</div>
+</ng-template>
+<ng-template pTemplate="item" let-item>
+{{item.description}}
+</ng-template>
+</p-dropdown>
+        <small appErrorMessage
+               [errors]="projectPlanField.errors"
+               [touched]="projectPlanField.touched"
+               [dirty]="projectPlanField.dirty">
+        </small>
+      </div>
+      <div class="field">
+        <label appLabel for="observation" label="Observación:" [required]="observationField"></label>
+        <input pInputText type="text" id="observation" formControlName="observation"/>
+        <small appErrorMessage
+               [errors]="observationField.errors"
+               [touched]="observationField.touched"
+               [dirty]="observationField.dirty">
+        </small>
+      </div>
+    <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <button pButton pRipple id="btnBack" type="button"
+                label="Cancelar"
+                class="p-button-info p-button-outlined"
+                icon="pi pi-arrow-left"
+                [loading]="(loaded$|async)!"
+                (click)="back()"></button>
+      </div>
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <button pButton pRipple id="submit" type="submit"
+                label="Guardar"
+                icon="pi pi-save"
+                [loading]="(loaded$|async)!"></button>
+      </div>
+    </div>
+  </form>
+</p-panel>
+
+

@@ -1,0 +1,178 @@
+ <app-skeleton *ngIf="isLoadingSkeleton" [type]="'card'"></app-skeleton>
+<p-panel *ngIf="!isLoadingSkeleton"
+         class="p-fluid"
+         collapseIcon="pi pi-times"
+         [toggleable]="true"
+         (collapsedChange)="back()">
+  <ng-template pTemplate="header">
+    <i *ngIf="id===''" class="pi pi-calendar-plus mr-2"></i>
+    <i *ngIf="id!=''" class="pi pi-user-edit mr-2"></i>
+    <h2 class="panel-header">{{panelHeader}}</h2>
+  </ng-template>
+  <small [innerHTML]="this.messageService.requiredFields"></small>
+  <p-divider></p-divider>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="formgrid grid">
+      <!--  title -->
+       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+         <label appLabel for="title" label="Titulo:" [required]="titleField"></label>
+         <input pInputText type="text" id="title" formControlName="title"/>
+         <small appErrorMessage
+                [errors]="titleField.errors"
+                [touched]="titleField.touched"
+                [dirty]="titleField.dirty">
+         </small>
+       </div>
+         <!-- description -->
+   <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+         <label appLabel for="description" label="Descripción:" [required]="descriptionField"></label>
+         <input pInputText type="text" id="description" formControlName="description"/>
+         <small appErrorMessage
+                [errors]="descriptionField.errors"
+                [touched]="descriptionField.touched"
+                [dirty]="descriptionField.dirty">
+         </small>
+       </div>
+     </div>
+
+     <div class="formgrid grid">
+       <!-- actCode -->
+        <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+         <label appLabel for="actCode" label="Código del acta:" [required]="actCodeField"></label>
+         <input pInputText type="text" id="actCode" formControlName="actCode"/>
+         <small appErrorMessage
+                [errors]="actCodeField.errors"
+                [touched]="actCodeField.touched"
+                [dirty]="actCodeField.dirty">
+         </small>
+       </div>
+          <!-- observation -->
+       <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+         <label appLabel for="observation" label="Observación:" [required]="observationField"></label>
+         <input pInputText type="text" id="observation" formControlName="observation"/>
+         <small appErrorMessage
+                [errors]="observationField.errors"
+                [touched]="observationField.touched"
+                [dirty]="observationField.dirty">
+         </small>
+       </div>
+     </div>
+
+      <!-- Planning -->
+      <div class="field">
+      <label appLabel for="planning" label="Convocatoria:" [required]="planningField"></label>
+      <p-dropdown id="planning"
+      formControlName="planning"
+      dataKey="id"
+      [options]="plannings"
+      optionLabel="name"
+      [filter]="true"
+      filterBy="name"
+      placeholder="Select convocatoria">
+<ng-template pTemplate="selectedItem">
+<div *ngIf="planningField.value">
+<div>{{planningField.value.name}}</div>
+</div>
+</ng-template>
+<ng-template pTemplate="item" let-item>
+{{item.name}}
+</ng-template>
+</p-dropdown>
+      <small appErrorMessage
+             [errors]="planningField.errors"
+             [touched]="planningField.touched"
+             [dirty]="planningField.dirty">
+      </small>
+    </div>
+
+
+  <!-- state -->
+ <div class="field">
+  <label appLabel for="state" label="Estado:" [required]="stateField"></label>
+  <p-dropdown id="state"
+                 formControlName="state"
+                 dataKey="id"
+                 [options]="states"
+                 display="chip"
+                 optionLabel="name"
+                 placeholder="Select state">
+    <ng-template pTemplate="selectedItem">
+      <div *ngIf="stateField.value">
+        <div>{{stateField.value.name}}</div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="item" let-item>
+      {{item.name}}
+    </ng-template>
+  </p-dropdown>
+  <small appErrorMessage
+         [errors]="stateField.errors"
+         [touched]="stateField.touched"
+         [dirty]="stateField.dirty">
+  </small>
+
+</div>
+
+<!--fechas -->
+
+<div class="formgrid grid">
+  <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+    <label appLabel for="assignedAt" label="Fecha del Anteproyecto:" [required]="assignedAtField"></label>
+    <p-calendar formControlName="assignedAt" id="assignedAt" dateFormat="dd/mm/yy"></p-calendar>
+    <small appErrorMessage
+           [errors]="assignedAtField.errors"
+           [touched]="assignedAtField.touched"
+           [dirty]="assignedAtField.dirty">
+    </small>
+  </div>
+  <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+    <label appLabel for="approvedAt" label="Fecha de Aprobacion del anteproyecto:" [required]="approvedAtField"></label>
+    <p-calendar formControlName="approvedAt" id="approvedAt" dateFormat="dd/mm/yy"></p-calendar>
+    <small appErrorMessage
+           [errors]="approvedAtField.errors"
+           [touched]="approvedAtField.touched"
+           [dirty]="approvedAtField.dirty">
+    </small>
+  </div>
+</div>
+
+
+<div class="formgrid grid">
+  <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+    <label appLabel for="tutorApprovedAt" label="Fecha de Aprobacion por el tutor:" [required]="tutorApprovedAtField"></label>
+    <p-calendar formControlName="tutorApprovedAt" id="tutorApprovedAt" dateFormat="dd/mm/yy"></p-calendar>
+    <small appErrorMessage
+           [errors]="tutorApprovedAtField.errors"
+           [touched]="tutorApprovedAtField.touched"
+           [dirty]="tutorApprovedAtField.dirty">
+    </small>
+  </div>
+</div>
+  <!-- botones -->
+
+    <div class="formgrid grid">
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <button pButton pRipple id="btnBack" type="button"
+                label="Cancel"
+                class="p-button-info p-button-outlined"
+                icon="pi pi-arrow-left"
+                [loading]="(loaded$|async)!"
+                (click)="back()"></button>
+      </div>
+      <div class="field xl:col-6 lg:col-6 md:col-6 sm:col-12">
+        <button pButton pRipple id="submit" type="submit"
+                label="Save"
+                icon="pi pi-save"
+                [loading]="(loaded$|async)!"></button>
+      </div>
+    </div>
+
+
+  </form>
+</p-panel>
+
+
+
+
+
